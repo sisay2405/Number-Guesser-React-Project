@@ -1,5 +1,5 @@
 import React from 'react';
-import GuessWinningNumber from './components/guessnumber';
+import GuessWinningNumber from './Components/guessnumber';
 
 const App = () => {
   return <GuessWinningNumber />;

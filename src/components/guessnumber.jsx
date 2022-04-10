@@ -6,13 +6,8 @@ const GuessWinningNumber = () => {
   const [round, setRound] = useState(0);
   const [wins, setWins] = useState(0);
   const [randomNumber, setrandomNumber] = useState(0)
-  const [losses, setLosses] = useState(0)
-//  const [wins, setWins] = useState(0);
-  // const [losses, setLosses] = useState(0);
-  //  const [roundCount, setRoundCount] = useState(0);
-  // const [image, setImage] = useState(null);
-  // const [flip, setFlip] = useState('');
-  // const [call, setCall] = useState('');
+
+
   function Random() {
     const maxNumber = 9;
     const randomNumber = setRound(Math.floor((Math.random() * maxNumber) + 1));
@@ -25,35 +20,13 @@ const GuessWinningNumber = () => {
     const flip = Math.round(Math.random()) === 0 ? 'heads' : 'tails';
     const wonRound = call === flip; // ! determining whether or not we won the round
 
-    // setRoundCount((prevRoundCount) => prevRoundCount + 1);
     setWins((prevWins) => (wonRound ? prevWins + 1 : prevWins));
     setLosses((prevLosses) => (!wonRound ? prevLosses + 1 : prevLosses));
-    // setImage(flip === 'heads' ? heads : tails);
-    // setFlip(flip);
-    // setCall(call);
+
   };
   return (
     <>
-    
-      {/* <h1>Welcome to Coin Flipper!</h1>
-      <p>
-        <strong>Rounds so far:</strong> {roundCount} | <strong>Wins:</strong>{' '}
-        {wins} | <strong>Losses:</strong> {losses}
-      </p>
-      {flip && (
-        <>
-  
-          <h2>Your Call: {call}</h2>
-          <h2>You {flip === call ? 'Won' : 'Lost'}!</h2>
-        </>
-      )}
-      {!flip && <h2>No flip yet! Make your call below to start a round!</h2>} */}
-    
-      {/* <h1>Welcome to Coin Flipper!</h1>
-      <p>
-        <strong>Rounds so far:</strong> {roundCount} | <strong>Wins:</strong>{' '}
-        {wins} | <strong>Losses:</strong> {losses}
-      </p> */}
+
       {randomNumber && 
       
  
@@ -76,7 +49,7 @@ const GuessWinningNumber = () => {
         <Button onClick={() => Random()}>7</Button>
         <Button onClick={() => Random()}>8</Button>
         <Button onClick={() => Random()}>9</Button> 
-        <Button onClick={() => callFlip('tails')}>Call Tails!</Button>
+        <Button onClick={() => callFlip('tails')}>bb!</Button>
        
         
        
