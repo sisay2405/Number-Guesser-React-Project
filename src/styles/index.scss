@@ -1,0 +1,49 @@
+body{
+  padding: 0;
+  margin: 0;
+  background-color:#0085FF;
+  color: aliceblue;
+}
+
+Button{
+  background-color: #26c289;
+	border: 10px solid #0085FF;;
+	color: whitesmoke;
+	padding:  1em 2em;
+	font-size: 1em;
+	display: inline-block;
+	width: 5%; 
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+  text-align: center;
+}
+.button{
+  text-align: center;
+}
+Button:hover {background-color: #3e8e41}
+Button:active {
+  // background-color: #3f3e8e;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+Button:after {
+  background-color: #120e02;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.title{
+  text-align: center;
+  margin-top: 100px;
+  // font-family: 'Courier New', Courier, monospace;
+  font-size: 70px;
+    font-family: 'Bangers';
+
+}
+.title2{
+   text-align: center;
+  // font-family: 'Courier New', Courier, monospace;
+  
+}
