@@ -1,6 +1,47 @@
 import React, { useState, useEffect } from "react";
 import Button from "./button.jsx";
-
+const buttonsArr = [
+  {
+    value: 0,
+    disabled: false
+  },
+  {
+    value: 1,
+    disabled: false
+  },
+  {
+    value: 2,
+    disabled: false
+  },
+  {
+    value: 3,
+    disabled: false
+  },
+  {
+    value: 4,
+    disabled: false
+  },
+  {
+    value: 5,
+    disabled: false
+  },
+  {
+    value: 6,
+    disabled: false
+  },
+  {
+    value: 7,
+    disabled: false
+  },
+  {
+    value: 8,
+    disabled: false
+  },
+  {
+    value: 9,
+    disabled: false
+  },
+]
 const GuessWinningNumber = () => {
   // console.log("1");
   const numRemaining = 3;
@@ -11,6 +52,7 @@ const GuessWinningNumber = () => {
   const [losses, setLosses] = useState(false);
   const [answer, setAnswer] = useState(0);
   const [rightAnswer, setRightAnswer] = useState(0);
+  const [buttons, setButtons] = useState(buttonsArr)
   // const [cls, setCls] = useState("green");
   useEffect(() => {
     setRightAnswer(Math.floor(Math.random() * 10));
@@ -55,8 +97,6 @@ const GuessWinningNumber = () => {
     setLeftMessage("Play Again");
     setBgcolor("dodgerblue")
   };
-
-  // const onClick = () => setCls((cls) => (cls === "red" ? "green" : "red"));
   return (
     <div style={{ backgroundColor: bgcolor, width: '', height: '950px' }}>
       <div className="header">{information}</div>
@@ -69,22 +109,15 @@ const GuessWinningNumber = () => {
         </div>
       ) : (
         <div className="button">
-          <Button onClick={() => { randomWinNumber(0)}}>0</Button>
-          <Button onClick={() => randomWinNumber(1)}>1</Button>
-          {/* <button
-        className={cls}
-        onClick={() => setCls((cls) => (cls === "red" ? "green" : "red"))}
-      >    <Button onClick={() => randomWinNumber(2)}></Button>
-       2
-      </button> */}
-          <Button onClick={() => randomWinNumber(2)}>2</Button>
-          <Button onClick={() => randomWinNumber(3)}>3</Button>
-          <Button onClick={() => randomWinNumber(4)}>4</Button>
-          <Button onClick={() => randomWinNumber(5)}>5</Button>
-          <Button onClick={() => randomWinNumber(6)}>6</Button>
-          <Button onClick={() => randomWinNumber(7)}>7</Button>
-          <Button onClick={() => randomWinNumber(8)}>8</Button>
-          <Button onClick={() => randomWinNumber(9)}>9</Button>
+          {
+            buttons.map(
+              (button) => (
+                <Button type="button" onClick={() => randomWinNumber(button.value)}>
+                  {button.value}
+                </Button>
+              )
+            )
+          }
         </div>
       )}
     </div>
