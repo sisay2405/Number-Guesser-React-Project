@@ -1,60 +1,93 @@
-
-import React, { useState } from 'react';
-import Button from './button.jsx';
+import React, { useState, useEffect } from "react";
+import Button from "./button.jsx";
 
 const GuessWinningNumber = () => {
-  const [round, setRound] = useState(0);
-  const [wins, setWins] = useState(0);
-  const [randomNumber, setrandomNumber] = useState(0)
+  // console.log("1");
+  const numRemaining = 3;
+  const [information, setInformation] = useState("GUESS A NUMBER!");
+  const [leftMessage, setLeftMessage] = useState("");
+  const [guessesRemaining, setGuessesRemaining] = useState(numRemaining);
+  const [bgcolor, setBgcolor] = useState("dodgerblue")
+  const [losses, setLosses] = useState(false);
+  const [answer, setAnswer] = useState("");
+  const [rightAnswer, setRightAnswer] = useState(0);
+  const [cls, setCls] = useState("green");
+  useEffect(() => {
+    setRightAnswer(Math.floor(Math.random() * 10));
+  }, [losses]);
 
+  useEffect(() => {
+    if (guessesRemaining === 0) {
+      setLosses(true);
+      setGuessesRemaining(3)
+      setInformation('GAME OVER: YOU LOSE!')
+      setBgcolor("red")
+      setAnswer("")
+    }
+  }, [guessesRemaining]);
 
-  function Random() {
-    const maxNumber = 9;
-    const randomNumber = setRound(Math.floor((Math.random() * maxNumber) + 1));
-    // return console.log(randomNumber)
-    setrandomNumber(randomNumber)
-    // }
-
-  } 
-    const callFlip = (call) => {
-    const flip = Math.round(Math.random()) === 0 ? 'heads' : 'tails';
-    const wonRound = call === flip; // ! determining whether or not we won the round
-
-    setWins((prevWins) => (wonRound ? prevWins + 1 : prevWins));
-    setLosses((prevLosses) => (!wonRound ? prevLosses + 1 : prevLosses));
-
-  };
-  return (
-    <>
-
-      {randomNumber && 
-      
- 
-          <h2>Your Call</h2>
-
-        
+  const randomWinNumber = (answer) => {
+    if (guessesRemaining > 0) {
+      setGuessesRemaining(prev => prev - 1);
+      if (answer === rightAnswer) {
+        setInformation("GAME OVER: YOU WON!");
+        setGuessesRemaining(3)
+        setLeftMessage("Play Again");
+        setLosses(true);
+        setBgcolor("green")
+      } else {
+        if (guessesRemaining === 2) {
+          setBgcolor("orange")
+          setGuessesRemaining(1)
+        } else {
+          setBgcolor("yellow")
+        }
+        setLeftMessage("Play");
       }
-      {!randomNumber && <h2>No flip yet! Make your call below to start a round!</h2>}
-      <h1 className="title">GUESS A NUMBER! {wins} {losses}</h1>
-      <h3 className="title2" > you guess is {round}{" "}Guesses Left: 3/3</h3>      
-      <h3 className="title2" > {round}{" "}Guesses Left: 2/3</h3>
-      <h3 className="title2" > {round}{" "}Guesses Left: 1/3</h3>
-      <section className="button">
-        <Button onClick={() => Random()}>0</Button> 
-        <Button onClick={() => Random()}>1</Button> 
-        <Button onClick={() => Random()}>2</Button>
-        <Button onClick={() => Random()}>3</Button>
-        <Button onClick={() => Random()}>5</Button> 
-        <Button onClick={() => Random()}>6</Button> 
-        <Button onClick={() => Random()}>7</Button>
-        <Button onClick={() => Random()}>8</Button>
-        <Button onClick={() => Random()}>9</Button> 
-        <Button onClick={() => callFlip('tails')}>bb!</Button>
-       
-        
-       
-      </section>
-    </>
+    }
+    else {
+      setLosses(true);
+    }
+  }
+  const startAgainButton = () => {
+    setInformation("GUESS A NUMBER");
+    setLosses(false);
+    setLeftMessage("Play Again");
+    setBgcolor("dodgerblue")
+  };
+
+  // const onClick = () => setCls((cls) => (cls === "red" ? "green" : "red"));
+  return (
+    <div style={{ backgroundColor: bgcolor, width: '', height: '950px' }}>
+      <div className="header">{information}</div>
+      <div className="playButtonGuess">
+        {(!losses) ? (<p>You have {guessesRemaining} Guesses.</p>) : (<p>The Right Answer is {rightAnswer}</p>)}
+      </div>
+      {losses ? (
+        <div className="playButton">
+          <Button onClick={() => startAgainButton()}>{leftMessage}</Button>
+        </div>
+      ) : (
+        <div className="button">
+          <Button onClick={() => { randomWinNumber(0)}}>0</Button>
+          <Button onClick={() => randomWinNumber(1)}>1</Button>
+          {/* <button
+        className={cls}
+        onClick={() => setCls((cls) => (cls === "red" ? "green" : "red"))}
+      >    <Button onClick={() => randomWinNumber(2)}></Button>
+       2
+      </button> */}
+          <Button onClick={() => randomWinNumber(2)}>2</Button>
+          <Button onClick={() => randomWinNumber(3)}>3</Button>
+          <Button onClick={() => randomWinNumber(4)}>4</Button>
+          <Button onClick={() => randomWinNumber(5)}>5</Button>
+          <Button onClick={() => randomWinNumber(6)}>6</Button>
+          <Button onClick={() => randomWinNumber(7)}>7</Button>
+          <Button onClick={() => randomWinNumber(8)}>8</Button>
+          <Button onClick={() => randomWinNumber(9)}>9</Button>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -1,20 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Patrick+Hand+SC|Roboto&display=swap');
 body{
   padding: 0;
   margin: 0;
-  background-color:#0085FF;
   color: aliceblue;
 }
-
+ .red {color: red}
+.green {color: rgb(24, 140, 207)}
 Button{
   background-color: #26c289;
-	border: 10px solid #0085FF;;
+	// border: 10px solid #0085FF;;
 	color: whitesmoke;
 	padding:  1em 2em;
-	font-size: 1em;
+	// font-size: 1em;
 	display: inline-block;
-	width: 5%; 
+	width: 6%; 
   padding: 15px 25px;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   border-radius: 15px;
   box-shadow: 0 9px #999;
@@ -25,25 +26,36 @@ Button{
 }
 Button:hover {background-color: #3e8e41}
 Button:active {
-  // background-color: #3f3e8e;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-Button:after {
+Button:visited {
   background-color: #120e02;
-  box-shadow: 0 5px #666;
+  box-shadow: 0 5px rgb(191, 175, 175);
   transform: translateY(4px);
 }
-.title{
+.header{
+  padding-top: 100px;
+ font-weight: 600;
   text-align: center;
-  margin-top: 100px;
-  // font-family: 'Courier New', Courier, monospace;
-  font-size: 70px;
-    font-family: 'Bangers';
+  font-size: 100px;
+  font-family: 'Bangers';
+text-shadow: -1px 1px 10px rgba(0, 0, 0, 0.75)
+  // transform: translateY(4px);
 
 }
-.title2{
+.playButton{
+  text-align: center;
+}
+.playButtonGuess{
+  text-align: center;
+  padding: 20px;
+  font-size: 25px;
+  font-weight: 600;
+  text-shadow: -1px 2px 15px rgba(0, 0, 0, 0.75)
+}
+.title1{
    text-align: center;
-  // font-family: 'Courier New', Courier, monospace;
+  font-family: 'Courier New', Courier, monospace;
   
 }
