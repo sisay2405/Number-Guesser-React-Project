@@ -9,9 +9,9 @@ const GuessWinningNumber = () => {
   const [guessesRemaining, setGuessesRemaining] = useState(numRemaining);
   const [bgcolor, setBgcolor] = useState("dodgerblue")
   const [losses, setLosses] = useState(false);
-  const [answer, setAnswer] = useState("");
+  const [answer, setAnswer] = useState(0);
   const [rightAnswer, setRightAnswer] = useState(0);
-  const [cls, setCls] = useState("green");
+  // const [cls, setCls] = useState("green");
   useEffect(() => {
     setRightAnswer(Math.floor(Math.random() * 10));
   }, [losses]);
