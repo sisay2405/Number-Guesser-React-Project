@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from "./button.jsx";
+import { nanoid } from 'nanoid';
 const buttonsArr = [
   {
     value: 0,
@@ -43,6 +44,7 @@ const buttonsArr = [
   }
 ]
 const GuessWinningNumber = () => {
+
   const numRemaining = 3;
   const [leftMessage, setLeftMessage] = useState("");
   const [guessesRemaining, setGuessesRemaining] = useState(numRemaining);
@@ -69,6 +71,7 @@ const GuessWinningNumber = () => {
   }, [guessesRemaining]);
 
   const randomWinNumber = (answer) => {
+ 
     if (guessesRemaining > 0) {
       setGuessesRemaining(prev => prev - 1);
       setDisabled(true);
@@ -111,7 +114,7 @@ const GuessWinningNumber = () => {
     <div style={{ backgroundColor: bgcolor, width: '', height: '950px' }}>
       <div className="header">{information}</div>
       <div className="playButtonGuess">
-        {(!loss) ? (<p>You have {guessesRemaining} Guesses.</p>) : (<p>The Right Answer is {rightAnswer}</p>)}
+        {(!loss) ? (<p>You have {guessesRemaining} Guesses.</p>) : (<p>If You want paly again , press the play button </p>)}
       </div>
       {loss ? (
         <div className="playButton">
@@ -120,7 +123,7 @@ const GuessWinningNumber = () => {
       ) : (
         <div className="button">
             {buttons.map((button) => (
-        <Button type="button" disabled={button.disabled} onClick={() => randomWinNumber(button.value)}>{button.value}</Button>
+              <Button type="button" key={nanoid()} disabled={button.disabled}  onClick={() => randomWinNumber(button.value)}>{button.value}</Button>
               )
             )
           }
