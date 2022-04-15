@@ -8,10 +8,8 @@ body{
 .green {color: rgb(24, 140, 207)}
 Button{
   background-color: #26c289;
-	// border: 10px solid #0085FF;;
 	color: whitesmoke;
 	padding:  1em 2em;
-	// font-size: 1em;
 	display: inline-block;
 	width: 6%; 
   padding: 15px 25px;
@@ -23,6 +21,16 @@ Button{
 }
 .button{
   text-align: center;
+}
+.copyRight{
+  font-size:23px;
+text-align: right;
+margin-top: 250px;
+color: rgb(0, 4, 10);
+text-shadow: -1px 1px 10px rgba(0, 0, 0, 0.75)
+}
+Button:disabled {
+background-color: rgb(177, 130, 130);
 }
 Button:hover {background-color: #3e8e41}
 Button:active {
@@ -41,8 +49,6 @@ Button:visited {
   font-size: 100px;
   font-family: 'Bangers';
 text-shadow: -1px 1px 10px rgba(0, 0, 0, 0.75)
-  // transform: translateY(4px);
-
 }
 .playButton{
   text-align: center;
@@ -57,5 +63,4 @@ text-shadow: -1px 1px 10px rgba(0, 0, 0, 0.75)
 .title1{
    text-align: center;
   font-family: 'Courier New', Courier, monospace;
-  
 }

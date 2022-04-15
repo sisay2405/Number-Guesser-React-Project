@@ -40,86 +40,94 @@ const buttonsArr = [
   {
     value: 9,
     disabled: false
-  },
+  }
 ]
 const GuessWinningNumber = () => {
-  // console.log("1");
   const numRemaining = 3;
-  const [information, setInformation] = useState("GUESS A NUMBER!");
   const [leftMessage, setLeftMessage] = useState("");
   const [guessesRemaining, setGuessesRemaining] = useState(numRemaining);
-  const [bgcolor, setBgcolor] = useState("dodgerblue")
-  const [losses, setLosses] = useState(false);
+  const [bgcolor, setBgcolor] = useState("dodgerblue");
+  const [loss, setLoss] = useState(false);
   const [answer, setAnswer] = useState(0);
   const [rightAnswer, setRightAnswer] = useState(0);
-  const [buttons, setButtons] = useState(buttonsArr)
-  // const [cls, setCls] = useState("green");
+  const [information, setInformation] = useState("GUESS A NUMBER!");
+  const [buttons, setButtons] = useState(buttonsArr);
+  const [disabled, setDisabled] = useState(false);
+
   useEffect(() => {
     setRightAnswer(Math.floor(Math.random() * 10));
-  }, [losses]);
+  }, [loss]);
 
   useEffect(() => {
     if (guessesRemaining === 0) {
-      setLosses(true);
-      setGuessesRemaining(3)
-      setInformation('GAME OVER: YOU LOSE!')
-      setBgcolor("red")
-      setAnswer("")
+      setLoss(true);
+      setGuessesRemaining(3);
+      setInformation('GAME OVER: YOU LOSE!');
+      setBgcolor("red");
+      setAnswer("");
     }
   }, [guessesRemaining]);
 
   const randomWinNumber = (answer) => {
     if (guessesRemaining > 0) {
       setGuessesRemaining(prev => prev - 1);
+      setDisabled(true);
       if (answer === rightAnswer) {
         setInformation("GAME OVER: YOU WON!");
-        setGuessesRemaining(3)
+        setGuessesRemaining(3);
         setLeftMessage("Play Again");
-        setLosses(true);
-        setBgcolor("green")
+        setLoss(true);
+        setBgcolor("green");
       } else {
+        let newbuttons = buttons.map((button) => {
+          if (button.value === answer) {
+            return { ...button, disabled:true} 
+          }
+          return button
+        })
+        setButtons(newbuttons)
         if (guessesRemaining === 2) {
-          setBgcolor("orange")
-          setGuessesRemaining(1)
+          setBgcolor("orange");
+          setGuessesRemaining(1);
         } else {
-          setBgcolor("yellow")
+          setBgcolor("yellow");
         }
         setLeftMessage("Play");
       }
     }
     else {
-      setLosses(true);
+      setLoss(true);
     }
   }
   const startAgainButton = () => {
     setInformation("GUESS A NUMBER");
-    setLosses(false);
+    setLoss(false);
     setLeftMessage("Play Again");
-    setBgcolor("dodgerblue")
+    setBgcolor("dodgerblue");
+    window.location.reload(false);
+
   };
   return (
     <div style={{ backgroundColor: bgcolor, width: '', height: '950px' }}>
       <div className="header">{information}</div>
       <div className="playButtonGuess">
-        {(!losses) ? (<p>You have {guessesRemaining} Guesses.</p>) : (<p>The Right Answer is {rightAnswer}</p>)}
+        {(!loss) ? (<p>You have {guessesRemaining} Guesses.</p>) : (<p>The Right Answer is {rightAnswer}</p>)}
       </div>
-      {losses ? (
+      {loss ? (
         <div className="playButton">
           <Button onClick={() => startAgainButton()}>{leftMessage}</Button>
         </div>
       ) : (
         <div className="button">
-          {
-            buttons.map(
-              (button) => (
-                <Button type="button" onClick={() => randomWinNumber(button.value)}>
-                  {button.value}
-                </Button>
+            {buttons.map((button) => (
+        <Button type="button" disabled={button.disabled} onClick={() => randomWinNumber(button.value)}>{button.value}</Button>
               )
             )
           }
         </div>
-      )}
+      )}  
+      <div className="copyRight">  © 2022:Byte Me Bitwise React</div> 
+      {/* <div className="copyRight">  © 2022:Byte Me <a target="_blank" href="http://sisayareaya.com/"> Bitwise React</a> </div>  */}
     </div>
   );
 };
